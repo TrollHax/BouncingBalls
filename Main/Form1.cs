@@ -5,6 +5,7 @@ namespace Main
     public partial class Form1 : Form
     {
         List<Ball> balls;
+        bool removeBall;
         public Form1()
         {
             InitializeComponent();
@@ -19,11 +20,19 @@ namespace Main
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            foreach (Ball ball in balls)
+            for (int i = 0; i < balls.Count(); i++)
             {
+                Ball ball = balls[i];
+                if (removeBall)
+                {
+                    balls.Remove(ball);
+                    removeBall = false;
+                }
+
                 ball.draw(e.Graphics);
                 ball.update(this.ClientSize.Width, this.ClientSize.Height);
             }
+            label1.Text = ("Amount of balls: " + balls.Count());
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -34,6 +43,14 @@ namespace Main
         private void button1_MouseClick(object sender, MouseEventArgs e)
         {
             balls.Add(new Ball(this.ClientSize.Width, this.ClientSize.Height, 50));
+        }
+
+        private void button2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (balls.Count > 0)
+            {
+                removeBall = true;
+            }
         }
     }
 }

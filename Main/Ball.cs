@@ -9,6 +9,8 @@ namespace Main
 {
     public class Ball
     {
+        private const int minVel = -10, maxVel = 11;
+
         private Vector2 pos;
         private Vector2 vel;
         private Color fillColor, borderColor;
@@ -17,8 +19,8 @@ namespace Main
 
         public Ball(int winWidth, int winHeight, int size)
         {
-            velX = random.Next(-10, 11);
-            velY = random.Next(-10, 11);
+            velX = random.Next(minVel, maxVel);
+            velY = random.Next(minVel, maxVel);
             red = random.Next(0, 256);
             green = random.Next(0, 256);
             blue = random.Next(0, 256);
@@ -29,7 +31,7 @@ namespace Main
                 while (velX <= 2 &&
                        velX >= -2)
                 {
-                    velX = random.Next(-10, 10);
+                    velX = random.Next(minVel, maxVel);
                 }
             }
             if (velY <= 2 &&
@@ -38,7 +40,7 @@ namespace Main
                 while (velY <= 2 &&
                        velY >= -2)
                 {
-                    velY = random.Next(-10, 10);
+                    velY = random.Next(minVel, maxVel);
                 }
             }
 
